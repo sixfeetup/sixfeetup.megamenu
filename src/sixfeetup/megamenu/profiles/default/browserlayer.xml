@@ -2,6 +2,6 @@
 <layers>
   <layer
       name="sixfeetup.megamenu"
-      interface="sixfeetup.megamenu.interfaces.ISixfeetupMegamenuLayer"
+      interface="sixfeetup.megamenu.browser.interfaces.IMegamenuSpecific"
       />
 </layers>

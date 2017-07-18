@@ -11,12 +11,6 @@
 
   <include package=".browser" />
 
-  <plone:static
-      directory="theme"
-      type="theme"
-      name="megamenu"
-      />
-
   <genericsetup:registerProfile
       name="default"
       title="Plone Theme: Megamenu"

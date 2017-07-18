@@ -1,0 +1,40 @@
+<tal:master
+    define="level options/level|python:0;
+            children options/children | nothing;
+            bottomLevel options/bottomLevel | nothing"
+    i18n:domain="plone">
+
+<metal:main
+    define-macro="nav_main">
+<tal:loop
+    repeat="node children"
+    condition="python:bottomLevel &lt;= 0 or level &lt;= bottomLevel">
+
+  <li tal:define="item            node/item;
+                  item_url        node/getURL;
+                  item_remote_url node/getRemoteUrl;
+                  use_remote_url  node/useRemoteUrl | nothing;
+                  show_children   node/show_children;
+                  children        node/children;
+                  class_has_dd    python:children and ' hasDropDown' or '';
+                  class_dropdown  python:children and ' dropdown-submenu' or '';
+                  class_position  python:'menu-position-{0}'.format(repeat.node.number);
+                  class_selected  python:' selected active' if item_url in context.absolute_url() else '';
+                  class_state     string: state-${node/normalized_review_state};"
+      class="${class_position}${class_dropdown}${class_selected}">
+    <a class="clearfix${class_state}${class_has_dd}"
+       title="${node/Description}"
+       href="${python:use_remote_url and item_remote_url or item_url}">
+      <span class="submenu_title">${node/Title}</span>
+    </a>
+
+    <ul tal:condition="python: len(children) > 0 and show_children"
+        class="${python:'submenu dropdown-menu navTree navTreeLevel'+str(level)}">
+      <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
+    </ul>
+
+  </li>
+
+</tal:loop>
+</metal:main>
+</tal:master>
