@@ -1,55 +1,496 @@
-.plone-navbar-nav li:hover > .submenu {
-  display: block;
+/* all color definitions go here
+   to make it easy to copy them to another file for changing */
+.plone-navbar-nav li .submenu,
+#subnav-wrapper,
+.plone-navbar-nav > li > .hoverParentLink::after {
+    background-color: #123456;
+}
+.plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) {
+    background-color: #345678;
+}
+.plone-navbar-nav li .submenu a {
+    color: white;
+}
+
+/* navigation styles */
+.plone-navbar-nav {
+    position: relative;
+}
+.navactive .plone-navbar-nav li.hoverParent > .submenu,
+.navactive .plone-navbar-nav li:hover > .submenu {
+    display: block;
 }
 .plone-navbar-nav li.active:after,
 .plone-navbar-nav li:hover:after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -10px;
-  width: 100%;
-  z-index: 999;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    z-index: 999;
 }
 .plone-navbar-nav li .submenu {
-  background-color: #007bb1;
-  display: none;
-  list-style: none;
-  padding-left: 0;
-  padding-bottom: 0;
-  position: absolute;
-  z-index: 9999;
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    padding-bottom: 0;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
 }
 .plone-navbar-nav li .submenu a {
-  color: white;
-  display: block;
-  line-height: 20px;
-  min-width: 14em;
-  padding: 15px 10px 15px 12px;
-  position: relative;
+    display: block;
+    line-height: 20px;
+    min-width: 14em;
+    padding: 15px 10px 15px 12px;
+    position: relative;
 }
 .plone-navbar-nav li .submenu a:hover {
-  background-color: #9abdd6;
-  text-decoration: none;
+    text-decoration: none;
 }
 .plone-navbar-nav li .submenu a:before {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 .plone-navbar-nav li .submenu a .submenu_image {
-  float: right;
+    float: right;
 }
 .plone-navbar-nav li .submenu li {
-  position: relative;
-  float: left;
+    position: relative;
+    float: left;
 }
 .plone-navbar-nav li .submenu li:hover ul {
-  top: 0;
-  left: 100%;
+    top: 0;
+    left: 100%;
 }
 @media (max-width: 768px) {
-  .plone-navbar-nav li .submenu {
-    display: none;
-  }
-  .plone-navbar-nav li:hover > .submenu {
-    display: none;
-  }
+    .plone-navbar-nav li .submenu {
+        display: none;
+    }
+    .plone-navbar-nav li:hover > .submenu {
+        display: none;
+    }
 }
+
+
+/* global nav */
+#portal-globalnav-wrapper {
+    height: 72px;
+}
+#nav-toggle {
+    display: none;
+    width: 53px;
+    height: 48px;
+    padding: 3px 3px 0 0;
+    margin: 20px 10px 0 0;
+    position: absolute;
+    top: 0;
+    right: 4.3%;
+    cursor: pointer;
+    overflow: hidden;
+}
+#nav-toggle .bar {
+    margin: 7px 0 0 12px;
+    width: 65%;
+    height: 3px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+#nav-toggle.active .bar:nth-of-type(1) {
+    -webkit-transform: rotate(45deg) translate(10px, 9px);
+    transform: rotate(45deg) translate(10px, 9px);
+}
+#nav-toggle.active .bar:nth-of-type(2) {
+    -webkit-transform: rotate(-45deg) translate(-3px, 2px);
+    transform: rotate(-45deg) translate(-3px, 2px);
+}
+#nav-toggle.active .bar:nth-of-type(3) {
+    -webkit-transform: translate(0, 40px);
+    transform: translate(0, 40px);
+}
+.plone-navbar-nav {
+    clear: both;
+    background-color: transparent;
+    float: none;
+    padding: 0;
+    width: 1170px;
+    margin: 23px auto 65px;
+    height: 46px;
+    z-index: 998;
+    display: -ms-flexbox;
+    -ms-flex-pack: end;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+.plone-navbar-nav li a,
+.plone-navbar-nav li.selected a,
+.plone-navbar-nav li a:hover {
+    border: none;
+    background: transparent;
+    /*min-width: 1em;*/
+}
+.plone-navbar-nav li a {
+    transition: color .5s;
+}
+.plone-navbar-nav li:last-of-type a {
+    padding-right: 0;
+}
+.plone-navbar-nav li a:hover {
+    transition: color .5s;
+}
+.plone-navbar-nav li > a {
+    text-transform: uppercase;
+}
+.plone-navbar-nav .firstTab {
+    margin-left: -18px;
+}
+#column-wrapper {
+    position: relative;
+}
+.dummy {
+    min-height: 0.1px;
+}
+#column-wrapper::before {
+    content: ' ';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    z-index: 990;
+    display: none;
+}
+.searchactive #column-wrapper::before,
+.navactive #column-wrapper::before {
+    display: block;
+}
+
+    /* subnav */
+    #subnav-wrapper {
+        z-index: 997;
+        position: absolute;
+        width: 100%;
+    }
+    #visual-portal-wrapper[class=''] #subnav-wrapper {
+        height: 0;
+    }
+    .navactive #subnav-wrapper {
+        height: 400px !important;
+        margin-top: 56px;
+    }
+    .plone-navbar-nav ul.submenu a img {
+        display: none !important;
+    }
+    .plone-navbar-nav .btn1 {
+        margin: 0 10px;
+        float: left;
+        position: relative;
+        top: -5px;
+    }
+    #nav-sales {
+        margin: 0 24px 0 60px;
+    }
+    #nav-sales,
+    #nav-support {
+        position: relative;
+        top: 6px;
+    }
+    .subnavBase .headerSocialIcons {
+        position: relative;
+        top: 2px;
+    }
+    .navactive .plone-navbar-nav ul.submenu li.hoverItem > div > ul {
+        left: 0;
+    }
+    @media screen and (min-width:1170px) {
+        .plone-navbar-nav > li > ul.submenu {
+            padding-bottom: 100px;
+            min-height: 400px;
+        }
+        .plone-navbar-nav .selected a:hover,
+        .plone-navbar-nav > li > .hoverParentLink {
+            background: transparent;
+        }
+        .plone-navbar-nav > li > .hoverParentLink::after {
+            content: ' ';
+            display: block;
+            width: 20px;
+            height: 20px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            margin: 11px auto -25px;
+        }
+        .plone-navbar-nav .hoverParentLink,
+        .plone-navbar-nav .hoverParentLink:hover {
+            text-decoration: none !important;
+        }
+        .plone-navbar-nav ul.submenu a.hasDropDown.hoverParentLink::after,
+        .plone-navbar-nav ul.submenu .hoverItem a.hasDropDown::after {
+            content: '〉';
+            /*color: #85bd40;*/
+            float: right;
+        }
+        .hoverParent {
+            position: relative;
+        }
+        .plone-navbar-nav ul {
+            border: none;
+            /*background-color: #071d4b;*/
+            width: 1170px;
+        }
+        .plone-navbar-nav > li {
+            position: static !important;
+        }
+        .plone-navbar-nav ul.submenu,
+        .plone-navbar-nav li.selected ul.submenu {
+            z-index: 999;
+            width: 1170px;
+            margin-top: 0;
+        }
+        .plone-navbar-nav li.firstTab:hover > ul,
+        .plone-navbar-nav li.sfhover.firstTab > ul {
+            left: -18px;
+        }
+        .plone-navbar-nav ul li:hover,
+        .plone-navbar-nav ul li.sfhover {
+            position: static;
+        }
+        .plone-navbar-nav ul.submenu li {
+            padding: 0;
+            border: none;
+            min-height: 18px;
+            float: none;
+            width: 192px;
+        }
+        .plone-navbar-nav > li > ul.submenu > li {
+            padding-left: 500px;
+            margin-left: -500px;
+        }
+        .plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) {
+            padding-top: 39px;
+            padding-left: 500px;
+            margin-left: -500px;
+            padding-bottom: 400px;
+            margin-bottom: -400px;
+            width: 192px;
+        }
+        .plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) a {
+            width: 192px;
+        }
+        .plone-navbar-nav > li > ul.submenu > li:last-of-type {
+            padding: 0 0 200px 500px;
+            width: 100%;
+        }
+        .plone-navbar-nav ul.submenu a,
+        .plone-navbar-nav li.selected .submenu a {
+            font-weight: normal;
+            text-transform: none;
+            border-top: none;
+            text-decoration: none;
+            padding: 10px 7px 12px 25px;
+            margin: 0 0 0 -25px;
+        }
+        .plone-navbar-nav li.prevMenu {
+            display: none !important;
+        }
+        .plone-navbar-nav ul.submenu a:hover,
+        .plone-navbar-nav ul.submenu .hoverItem > a,
+        .plone-navbar-nav ul.submenu .hoverItem > div > a,
+        .plone-navbar-nav li.selected ul.submenu a:hover {
+            border: none;
+            text-decoration: none;
+            background-color: #071d4b;
+            padding-left: 25px;
+            margin-left: -25px;
+        }
+        .plone-navbar-nav .submenu ul {
+            top: 0;
+            display: none;
+            height: 100%;
+            padding-top: 39px;
+            margin-left: 192px;
+            background-color: transparent;
+            left: auto;
+        }
+        .plone-navbar-nav .submenu .hoverItem ul {
+            display: block;
+        }
+        .plone-navbar-nav .submenu ul li {
+            border-right: 1px solid rgba(0, 174, 239, 0.2);
+        }
+        .plone-navbar-nav .navTreeLevel1:nth-of-type(1) {
+            padding-left: 45px;
+        }
+        .plone-navbar-nav .navTreeLevel1:nth-of-type(2) {
+            margin-left: 557px;
+        }
+        .plone-navbar-nav .navTreeLevel1:nth-of-type(3) {
+            margin-left: 878px;
+            border-right: none;
+        }
+        .plone-navbar-nav .navTreeLevel1:last-of-type li {
+            border-right: none;
+        }
+        .plone-navbar-nav ul.submenu ul a,
+        .plone-navbar-nav li.selected .submenu ul a,
+        .plone-navbar-nav ul.submenu ul a:hover,
+        .plone-navbar-nav ul.submenu .hoverItem ul > a,
+        .plone-navbar-nav ul.submenu .hoverItem ul > div > a,
+        .plone-navbar-nav li.selected ul.submenu ul a:hover {
+            margin-left: 0;
+            border-bottom: none !important;
+        }
+        .plone-navbar-nav ul.submenu.navTreeLevel1 li {
+            padding: 11px 15px 11px 60px;
+            width: 245px;
+        }
+        .plone-navbar-nav ul.submenu.navTreeLevel1 li:hover a {
+            border-bottom: none !important;
+        }
+        .plone-navbar-nav ul.submenu.navTreeLevel1 li a,
+        .plone-navbar-nav ul.submenu.navTreeLevel1 li a:hover {
+            width: auto;
+            padding: 0;
+            margin: 0;
+        }
+        .plone-navbar-nav ul.submenu.navTreeLevel1 a.hasDropDown::after {
+            content: '';
+        }
+        .plone-navbar-nav ul.submenu.navTreeLevel2 {
+            display: none !important;
+        }
+        /* display second level as a grid, determined by JS */
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(2),
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(3),
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(4),
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(5) {
+            margin: 39px 60px 0 0;
+            padding: 0 0 0 0;
+            width: 245px;
+            border-right: 1px solid rgba(0, 174, 239, 0.2);
+            background-color: transparent;
+            float: left;
+        }
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(5) {
+            margin-right: 0;
+        }
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-last-of-type(2) {
+            border-right: none;
+        }
+        /* subnavBase */
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li:last-of-type {
+            float: none;
+            box-sizing: content-box;
+            width: 100%;
+            padding: 35px;
+            border-right: none;
+            text-align: center;
+        }
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li a,
+        .plone-navbar-nav > li.displayGrid > ul.submenu > li a:hover {
+            background-color: transparent;
+            margin: 0;
+            padding-left: 0;
+        }
+        /* sticky nav */
+        body.stickyNav {
+            margin-top: 90px;
+        }
+        .stickyNav #globalnav-wrapper {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 65px;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 997;
+        }
+        .stickyNav .plone-navbar-nav {
+            top: 0;
+            margin-top: 18px;
+        }
+        .stickyNav .plone-navbar-nav > li > a {
+            /*color: #ffffff;*/
+        }
+        .stickyNav .plone-navbar-nav > li >a:hover {
+            /*color: #00aeef;*/
+        }
+        .stickyNav .plone-navbar-nav > li > .hoverParentLink::after {
+            content: ' ';
+            display: block;
+            width: 20px;
+            height: 20px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            margin: 7px auto -29px;
+        }
+        .stickyNav #subnav-wrapper {
+            margin-top: -64px;
+        }
+        .stickyNav #portal-logo {
+            position: fixed;
+            margin-top: 0;
+            top: 34px;
+            z-index: 2;
+            height: 26px;
+        }
+        .stickyNav #portal-logo img {
+            width: 90px;
+        }
+        .stickyNav #portal-searchbox {
+            position: fixed;
+            margin: 0;
+            top: 32px;
+        }
+        .stickyNav .searchToggle {
+            width: 20px;
+            height: 23px;
+            background-size: 63px;
+            margin-left: 105px;
+        }
+        .stickyNav .searchToggle:hover,
+        .stickyNav #portal-searchbox.active .searchToggle {
+            background-position: -42px top;
+        }
+        .stickyNav #livesearch0 {
+            position: fixed;
+            padding: 20px 0;
+            width: 89%;
+            margin-left: 4%;
+        }
+        .stickyNav #subnav-wrapper.search {
+            height: 140px;
+        }
+        .stickyNav .searchactive #LSResult {
+            position: fixed;
+            margin-top: 70px;
+            height: calc(100% - 160px);
+            overflow: scroll;
+        }
+        .stickyNav .portal-logo-text {
+            position: fixed;
+            top: 37px;
+            margin-top: 0;
+            /*color: #fff;*/
+            margin-left: 107px;
+            z-index: 1px;
+        }
+        .stickyNav .portal-logo-text svg {
+            fill: #ffffff;
+            width: 76px;
+            height: 14px;
+        }
+
+    }
+    .plone-navbar-nav > li > ul.submenu > li.subnavBase {
+        width: 100%;
+        background-color: #000000;
+        position: absolute;
+        padding: 35px 500px;
+        margin: 0 -500px;
+        z-index: 1001;
+        height: 30px;
+        color: #ffffff;
+        bottom: 0;
+    }
+    .subnavBase.topLevel {
+        display: none;
+    }

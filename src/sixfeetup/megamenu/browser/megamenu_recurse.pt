@@ -28,12 +28,30 @@
       <span class="submenu_title">${node/Title}</span>
     </a>
 
-    <ul tal:condition="python: len(children) > 0 and show_children"
-        class="${python:'submenu dropdown-menu navTree navTreeLevel'+str(level)}">
-      <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
-    </ul>
+    <div class="mobileWrapper"
+         tal:condition="python: len(children) > 0 and show_children">
+        <ul class="${python:'submenu dropdown-menu navTree navTreeLevel'+str(level)}">
+            <li class="prevMenu">
+                <a href="#" class="back">
+                    <span>&lt;</span>
+                    Back
+                </a>
+                <a href=""
+                   tal:content="node/Title"
+                   tal:attributes="href item_url">Section Title</a>
+            </li>
+            <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
+        </ul>
+    </div>
 
   </li>
+  
+  <tal:column define="num repeat/node/number;
+                      eighth python: num % 8 == 0;
+                      level1 python:level > 1"
+              condition="python: eighth and level1">
+      <span tal:replace="structure string:</ul><ul class='submenu navTree navTreeLevel1'>" />
+  </tal:column>
 
 </tal:loop>
 </metal:main>

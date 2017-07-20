@@ -42,7 +42,7 @@
                       class="dropdown-toggle${review_state}"
                       role="button"
                       aria-haspopup="true"
-                      aria-expanded="false">${tab/name} <span class="caret"></span></a>
+                      aria-expanded="false">${tab/name}</a>
                   <a
                       tal:condition="not:subitems"
                       href="${href}"
@@ -52,9 +52,23 @@
 
                   <tal:block tal:condition="subitems">
                   <ul class="submenu dropdown-menu">
-                  <tal:subitems tal:replace="structure subitems">
-                    <tal:comment replace="nothing">Submenu</tal:comment>
-                  </tal:subitems>
+                      <li class="prevMenu">
+                          <a href="#" class="back">
+                              <span>&lt;</span>
+                              Back
+                          </a>
+                          <a href="" 
+                             tal:content="tab/name"
+                             tal:attributes="href tab/url">Section Title</a>
+                      </li>
+                      <tal:subitems tal:replace="structure subitems">
+                         <tal:comment replace="nothing">Submenu</tal:comment>
+                      </tal:subitems>
+                      <li class="subnavBase">
+                        <div class="maincol">
+                            Contact Us
+                        </div>
+                      </li>
                   </ul>
                   </tal:block>
               </li>
@@ -62,6 +76,7 @@
         </ul>
       </div>
     </div>
+    <div id="subnav-wrapper"></div>
   </nav>
 
 </tal:sections>
