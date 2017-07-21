@@ -178,7 +178,6 @@ ul.submenu {
 #portal-globalnav li a:hover {
     border: none;
     background: transparent;
-    font-size: 16px;
     padding: 15px 20px;
     min-width: 1em;
 }
@@ -345,10 +344,8 @@ ul.submenu {
         #portal-globalnav ul.submenu a,
         #portal-globalnav li.selected .submenu a {
             font-weight: normal;
-            font-family: 'Akkurat Bold', Arial, sans-serif;
             text-transform: none;
             border-top: none;
-            font-size: 15px;
             text-decoration: none;
             padding: 10px 7px 12px 25px;
             margin: 0 0 0 -25px;
@@ -362,7 +359,6 @@ ul.submenu {
         #portal-globalnav li.selected ul.submenu a:hover {
             border: none;
             text-decoration: none;
-            font-size: 15px;
             padding-left: 25px;
             margin-left: -25px;
         }
@@ -398,7 +394,6 @@ ul.submenu {
         #portal-globalnav li.selected ul.submenu ul a:hover {
             margin-left: 0;
             background-color: transparent;
-            font-family: 'Akkurat', Arial, sans-serif;
             border-bottom: none !important;
         }
         #portal-globalnav ul.submenu.navTreeLevel1 li {
@@ -463,9 +458,6 @@ ul.submenu {
             top: 0;
             margin-top: 18px;
         }
-        .stickyNav #portal-globalnav > li > a {
-            font-size: 16px;
-        }
         .stickyNav #portal-globalnav > li > .hoverParentLink::after {
             content: ' ';
             display: block;
@@ -483,7 +475,6 @@ ul.submenu {
             margin-top: 0;
             top: 34px;
             z-index: 2;
-            font-size: 22px;
             height: 26px;
         }
         .stickyNav #portal-logo img {
@@ -523,7 +514,6 @@ ul.submenu {
             position: fixed;
             top: 37px;
             margin-top: 0;
-            font-size: 22px;
             margin-left: 107px;
             z-index: 1px;
         }
@@ -541,7 +531,6 @@ ul.submenu {
         margin: 0 -500px;
         z-index: 1001;
         height: 30px;
-        font-size: 13px;
         bottom: 0;
         text-align: center;
         box-sizing: content-box;
