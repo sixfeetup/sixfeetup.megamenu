@@ -49,7 +49,7 @@
             }, 
             function () {
                 navActive = false;
-                // hideNav();
+                hideNav();
             }
         );
         $("#portal-globalnav > li").hover(
