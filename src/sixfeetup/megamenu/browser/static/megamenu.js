@@ -21,7 +21,7 @@
         showNavTimeout = window.setTimeout(function(){
             $("#visual-portal-wrapper").addClass("navactive");
             $(".hoverParent > a").removeClass("hoverParentLink");
-            $(".plone-navbar-nav li").removeClass("hoverParent");
+            $("#portal-globalnav li").removeClass("hoverParent");
             $(nav).addClass("hoverParent");
             $(".hoverParent > a").addClass("hoverParentLink");
             $("#LSResult").hide();
@@ -31,7 +31,7 @@
         if (navActive == false) {
             hideNavTimeout = window.setTimeout(function(){
                 $(".hoverParent > a").removeClass("hoverParentLink");
-                $(".plone-navbar-nav li").removeClass("hoverParent");
+                $("#portal-globalnav li").removeClass("hoverParent");
                 $("#visual-portal-wrapper").removeClass("navactive");
             }, 500);
         }
@@ -39,20 +39,20 @@
     
     if ($(window).width() > 1170) {
         // main navigation classes for styling
-        $(".plone-navbar-nav ul.submenu li").hover(
+        $("#portal-globalnav ul.submenu li").hover(
            function () { $(this).addClass("hoverItem"); }, 
            function () { $(this).removeClass("hoverItem"); }
         );
-        $(".plone-navbar-nav").hover(
+        $("#portal-globalnav").hover(
             function () {
                 navActive = true;
             }, 
             function () {
                 navActive = false;
-                hideNav();
+                // hideNav();
             }
         );
-        $(".plone-navbar-nav > li").hover(
+        $("#portal-globalnav > li").hover(
             function () {
                 if ($(this).find("ul").length > 0) {
                     navActive = true;
@@ -71,7 +71,7 @@
                 clearTimeout(showNavTimeout);
             }
         );
-        $(".plone-navbar-nav > li > a").hover(
+        $("#portal-globalnav > li > a").hover(
             function () {
                 $(this).parent("li").find("ul.submenu > li:eq(1):has(div)").addClass("hoverItem");
             }, 
@@ -81,18 +81,18 @@
         );
     }
     // display the second level nav in a grid if there is no tertiary nav
-    var toplinksnum = $(".plone-navbar-nav > li").length;
+    var toplinksnum = $("#portal-globalnav > li").length;
     if ($("body").hasClass("site-careers")) {
         var split_at = 3;
     } else {
         var split_at = 5;
     }
     for(i = 0; i < toplinksnum; i++) {
-        numlevels = $(".plone-navbar-nav > li").eq(i).find(".navTreeLevel1").length;
-        numchildren = $(".plone-navbar-nav > li").eq(i).find(".submenu > li").length;
+        numlevels = $("#portal-globalnav > li").eq(i).find(".navTreeLevel1").length;
+        numchildren = $("#portal-globalnav > li").eq(i).find(".submenu > li").length;
         if (numlevels == 0 && numchildren > 0) {
-            $(".plone-navbar-nav > li").eq(i).addClass("displayGrid");
-            var this_menu = $(".plone-navbar-nav > li").eq(i).find(".submenu")
+            $("#portal-globalnav > li").eq(i).addClass("displayGrid");
+            var this_menu = $("#portal-globalnav > li").eq(i).find(".submenu")
             var links = $(this_menu).find("li").detach();
             var last_item = links[links.length - 1];
             var new_lists = links[0].outerHTML + "<li>";
@@ -112,8 +112,8 @@
     $("#nav-toggle").click(function(){
         $(this).toggleClass("active");
         $("#visual-portal-wrapper").toggleClass("navactive");
-        $(".plone-navbar-nav").toggleClass("displayMenu");
-        $(".plone-navbar-nav li.displayMenu").removeClass("displayMenu")
+        $("#portal-globalnav").toggleClass("displayMenu");
+        $("#portal-globalnav li.displayMenu").removeClass("displayMenu")
         $(".subnavBase.topLevel").toggle();
     });
     $(".prevMenu .back").click(function() {
@@ -135,6 +135,6 @@
         }
     });
     $("#subnav-wrapper").css("margin-bottom", tallestSubnav);
-    $(".plone-navbar-nav").addClass("mobileReady");
+    $("#portal-globalnav").addClass("mobileReady");
 }); })(jQuery);
 

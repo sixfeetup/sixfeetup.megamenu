@@ -1,58 +1,58 @@
-<tal:master
-    define="level options/level|python:0;
-            children options/children | nothing;
-            bottomLevel options/bottomLevel | nothing"
-    i18n:domain="plone">
+<tal:comment replace="nothing">
+    This template has all sorts of classes and extra wrappers added
+    so that the same code can be used for both the desktop megamenu
+    and mobile navigation. Breakpoint between the two is at 900px.
+</tal:comment>
+
+<tal:master define="level options/level|python:0;
+                    children options/children | nothing;
+                    bottomLevel options/bottomLevel | nothing;
+                    navigation_root_url view/navigation_root_url"
+            i18n:domain="plone">
 
 <metal:main
     define-macro="nav_main">
-<tal:loop
-    repeat="node children"
-    condition="python:bottomLevel &lt;= 0 or level &lt;= bottomLevel">
+                <tal:navitem repeat="node children">
+<li tal:define="show_children   node/show_children;
+                children        node/children;
+                item_type       node/portal_type;
+                item_url        node/getURL;
+                item_remote_url node/getRemoteUrl;
+                use_remote_url  node/useRemoteUrl | nothing;"
+    tal:condition="python:bottomLevel &lt;= 0 or level &lt;= bottomLevel">
 
-  <li tal:define="item            node/item;
-                  item_url        node/getURL;
-                  item_remote_url node/getRemoteUrl;
-                  use_remote_url  node/useRemoteUrl | nothing;
-                  show_children   node/show_children;
-                  children        node/children;
-                  class_has_dd    python:children and ' hasDropDown' or '';
-                  class_dropdown  python:children and ' dropdown-submenu' or '';
-                  class_position  python:'menu-position-{0}'.format(repeat.node.number);
-                  class_selected  python:' selected active' if item_url in context.absolute_url() else '';
-                  class_state     string: state-${node/normalized_review_state};"
-      class="${class_position}${class_dropdown}${class_selected}">
-    <a class="clearfix${class_state}${class_has_dd}"
-       title="${node/Description}"
-       href="${python:use_remote_url and item_remote_url or item_url}">
-      <span class="submenu_title">${node/Title}</span>
-    </a>
+    <tal:level define="has_children nocall:children;
+                       children_class python:has_children and ' hasDropDown' or '';
+                       item_class string:${children_class};">
 
-    <div class="mobileWrapper"
-         tal:condition="python: len(children) > 0 and show_children">
-        <ul class="${python:'submenu dropdown-menu navTree navTreeLevel'+str(level)}">
-            <li class="prevMenu">
-                <a href="#" class="back">
-                    <span>&lt;</span>
-                    Back
-                </a>
-                <a href=""
-                   tal:content="node/Title"
-                   tal:attributes="href item_url">Section Title</a>
-            </li>
-            <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
-        </ul>
-    </div>
+        <a tal:attributes="href python:use_remote_url and item_remote_url or item_url;
+                           class string:${item_class}">
+            <span tal:replace="node/Title">Selected Item Title</span>
+        </a>
 
-  </li>
-  
-  <tal:column define="num repeat/node/number;
-                      eighth python: num % 8 == 0;
-                      level1 python:level > 1"
-              condition="python: eighth and level1">
-      <span tal:replace="structure string:</ul><ul class='submenu navTree navTreeLevel1'>" />
-  </tal:column>
-
-</tal:loop>
+        <div class="mobileWrapper"
+             tal:condition="python: len(children) > 0 and show_children">
+            <ul tal:attributes="class python:'submenu navTree navTreeLevel'+str(level)">
+                <li class="prevMenu">
+                    <a href="#" class="back">
+                        <span>&lt;</span>
+                        Back
+                    </a>
+                    <a href=""
+                       tal:content="node/Title"
+                       tal:attributes="href item_url">Section Title</a>
+                </li>
+                <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
+            </ul>
+        </div>
+    </tal:level>
+</li>
+<tal:column define="num repeat/node/number;
+                    eighth python: num % 8 == 0;
+                    level1 python:level > 1"
+            condition="python: eighth and level1">
+    <span tal:replace="structure string:</ul><ul class='submenu navTree navTreeLevel1'>" />
+</tal:column>
+</tal:navitem>
 </metal:main>
 </tal:master>

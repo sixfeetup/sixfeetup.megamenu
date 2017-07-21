@@ -1,79 +1,131 @@
 /* all color definitions go here
-   to make it easy to copy them to another file for changing */
-.plone-navbar-nav li .submenu,
+   to make it easy to copy them to another file for overrides */
+#portal-globalnav li .submenu,
 #subnav-wrapper,
-.plone-navbar-nav > li > .hoverParentLink::after {
+#portal-globalnav > li > .hoverParentLink::after,
+#portal-globalnav > li > ul.submenu > li.hoverItem a {
     background-color: #123456;
 }
-.plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) {
+#portal-globalnav > li > ul.submenu > li:nth-of-type(2) {
     background-color: #345678;
 }
-.plone-navbar-nav li .submenu a {
+#portal-globalnav li .submenu a,
+.subnavBase {
     color: white;
 }
+.subnavBase {
+    background-color: #000000 !important;
+}
 
-/* navigation styles */
-.plone-navbar-nav {
-    position: relative;
+/* keep the edit bar on top */
+.plone-toolbar-left #edit-zone {
+    z-index: 1005;
 }
-.navactive .plone-navbar-nav li.hoverParent > .submenu,
-.navactive .plone-navbar-nav li:hover > .submenu {
-    display: block;
+
+#portal-globalnav {
+    position:relative;
+    z-index:3;
 }
-.plone-navbar-nav li.active:after,
-.plone-navbar-nav li:hover:after {
-    content: "";
-    display: block;
+* html #portal-globalnav {
+    height:1%;
+}
+#portal-globalnav:after {
+    content:"";
+    clear:both;
+    display:block;
+    visibility:hidden;
+}
+#portal-globalnav li {
+    float:left;
+    margin:0;
+    padding:0;
+    list-style: none none;
+}
+#portal-globalnav li a {
+    display:block;   
+    position:relative;
+}
+
+
+/*
+** SUBMENU STYLES 
+*/
+
+ul.submenu {
     position: absolute;
-    bottom: -10px;
-    width: 100%;
-    z-index: 999;
+    width: 15em;
+    left:-999em;
+    background: #fff;
+    border-width: 1px;
+    border-style: none solid solid solid;
+    margin:0;
 }
-.plone-navbar-nav li .submenu {
-    display: none;
-    list-style: none;
-    padding-left: 0;
-    padding-bottom: 0;
-    position: absolute;
-    z-index: 9999;
-    left: 0;
+#portal-globalnav li.selected ul.submenu {
+    margin-top:-1px;
+    z-index:3;
 }
-.plone-navbar-nav li .submenu a {
-    display: block;
-    line-height: 20px;
-    min-width: 14em;
-    padding: 15px 10px 15px 12px;
-    position: relative;
+#portal-globalnav ul.submenu li {
+    display:block;
+    width:100%;
 }
-.plone-navbar-nav li .submenu a:hover {
-    text-decoration: none;
-}
-.plone-navbar-nav li .submenu a:before {
-    margin-right: 10px;
-}
-.plone-navbar-nav li .submenu a .submenu_image {
-    float: right;
-}
-.plone-navbar-nav li .submenu li {
-    position: relative;
-    float: left;
-}
-.plone-navbar-nav li .submenu li:hover ul {
-    top: 0;
-    left: 100%;
-}
-@media (max-width: 768px) {
-    .plone-navbar-nav li .submenu {
-        display: none;
-    }
-    .plone-navbar-nav li:hover > .submenu {
-        display: none;
-    }
+#portal-globalnav ul.submenu a,
+#portal-globalnav ul.submenu a:hover {
+    margin:0;
+    display:block;
+    border-style: solid none none;
+    position:static !important;
+    white-space:normal;
 }
 
 
-/* global nav */
-#portal-globalnav-wrapper {
+/* side-dropdown menu styles */
+#portal-globalnav li ul ul {
+    z-index:10;
+    top:0.4em;
+    left:-999em;
+    left:0;
+    margin: 0 0 0 14em;
+}
+
+#portal-globalnav ul li:hover,
+#portal-globalnav ul li.sfhover {
+    position:relative;
+}
+
+#portal-globalnav li:hover ul ul, 
+#portal-globalnav li:hover ul ul ul, 
+#portal-globalnav li:hover ul ul ul ul,
+#portal-globalnav li.sfhover ul ul, 
+#portal-globalnav li.sfhover ul ul ul,
+#portal-globalnav li.sfhover ul ul ul ul {
+    left:-999em;
+}
+
+#portal-globalnav li:hover ul, 
+#portal-globalnav li li:hover ul, 
+#portal-globalnav li li li:hover ul,
+#portal-globalnav li li li li:hover ul, 
+#portal-globalnav li.sfhover ul, 
+#portal-globalnav li li.sfhover ul, 
+#portal-globalnav li li li.sfhover ul,
+#portal-globalnav li li li li.sfhover ul {
+    left:auto;
+}
+
+/* clearing global navigation styles */
+#post-sections-clear {
+    height:1px;
+    margin-bottom:-3px;
+}
+
+/* See above for explanation of the below mess styles */
+*:first-child+html #post-sections-clear {margin-bottom:-2px;}
+* html #post-sections-clear {
+    margin-bottom:-2px;
+}
+
+/* custom */
+#globalnav-wrapper {
     height: 72px;
 }
 #nav-toggle {
@@ -107,12 +159,11 @@
     -webkit-transform: translate(0, 40px);
     transform: translate(0, 40px);
 }
-.plone-navbar-nav {
+#portal-globalnav {
     clear: both;
     background-color: transparent;
-    float: none;
     padding: 0;
-    width: 1170px;
+    width: 1180px;
     margin: 23px auto 65px;
     height: 46px;
     z-index: 998;
@@ -122,26 +173,25 @@
     justify-content: flex-end;
     position: relative;
 }
-.plone-navbar-nav li a,
-.plone-navbar-nav li.selected a,
-.plone-navbar-nav li a:hover {
+#portal-globalnav li a,
+#portal-globalnav li.selected a,
+#portal-globalnav li a:hover {
     border: none;
     background: transparent;
-    /*min-width: 1em;*/
+    font-size: 16px;
+    padding: 15px 20px;
+    min-width: 1em;
 }
-.plone-navbar-nav li a {
+#portal-globalnav li a {
     transition: color .5s;
 }
-.plone-navbar-nav li:last-of-type a {
+#portal-globalnav li:last-of-type a {
     padding-right: 0;
 }
-.plone-navbar-nav li a:hover {
-    transition: color .5s;
-}
-.plone-navbar-nav li > a {
+#portal-globalnav li > a {
     text-transform: uppercase;
 }
-.plone-navbar-nav .firstTab {
+#portal-globalnav .firstTab {
     margin-left: -18px;
 }
 #column-wrapper {
@@ -169,18 +219,15 @@
         z-index: 997;
         position: absolute;
         width: 100%;
+        margin-top: -59px;
     }
     #visual-portal-wrapper[class=''] #subnav-wrapper {
         height: 0;
     }
     .navactive #subnav-wrapper {
-        height: 400px !important;
-        margin-top: 56px;
+        height: 300px;
     }
-    .plone-navbar-nav ul.submenu a img {
-        display: none !important;
-    }
-    .plone-navbar-nav .btn1 {
+    #portal-globalnav .btn1 {
         margin: 0 10px;
         float: left;
         position: relative;
@@ -198,171 +245,185 @@
         position: relative;
         top: 2px;
     }
-    .navactive .plone-navbar-nav ul.submenu li.hoverItem > div > ul {
+    #portal-globalnav ul.submenu li.hoverItem > div > ul {
         left: 0;
     }
-    @media screen and (min-width:1170px) {
-        .plone-navbar-nav > li > ul.submenu {
+    @media screen and (min-width:1180px) {
+        #portal-globalnav > li > ul.submenu {
             padding-bottom: 100px;
             min-height: 400px;
         }
-        .plone-navbar-nav .selected a:hover,
-        .plone-navbar-nav > li > .hoverParentLink {
+        #portal-globalnav .selected a:hover,
+        #portal-globalnav > li > .hoverParentLink {
             background: transparent;
         }
-        .plone-navbar-nav > li > .hoverParentLink::after {
+        #portal-globalnav > li > .hoverParentLink::after {
             content: ' ';
             display: block;
             width: 20px;
             height: 20px;
             -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
-            margin: 11px auto -25px;
+            margin: 4px auto -25px;
         }
-        .plone-navbar-nav .hoverParentLink,
-        .plone-navbar-nav .hoverParentLink:hover {
+        #portal-globalnav .hoverParentLink,
+        #portal-globalnav .hoverParentLink:hover {
             text-decoration: none !important;
         }
-        .plone-navbar-nav ul.submenu a.hasDropDown.hoverParentLink::after,
-        .plone-navbar-nav ul.submenu .hoverItem a.hasDropDown::after {
+        #portal-globalnav ul.submenu a.hasDropDown.hoverParentLink::after,
+        #portal-globalnav ul.submenu .hoverItem a.hasDropDown::after {
             content: '〉';
-            /*color: #85bd40;*/
+            color: #85bd40;
             float: right;
         }
         .hoverParent {
             position: relative;
         }
-        .plone-navbar-nav ul {
+        #portal-globalnav ul {
             border: none;
-            /*background-color: #071d4b;*/
-            width: 1170px;
+            width: 1180px;
         }
-        .plone-navbar-nav > li {
-            position: static !important;
-        }
-        .plone-navbar-nav ul.submenu,
-        .plone-navbar-nav li.selected ul.submenu {
-            z-index: 999;
-            width: 1170px;
-            margin-top: 0;
-        }
-        .plone-navbar-nav li.firstTab:hover > ul,
-        .plone-navbar-nav li.sfhover.firstTab > ul {
-            left: -18px;
-        }
-        .plone-navbar-nav ul li:hover,
-        .plone-navbar-nav ul li.sfhover {
+        #portal-globalnav > li {
             position: static;
         }
-        .plone-navbar-nav ul.submenu li {
+        #portal-globalnav ul.submenu,
+        #portal-globalnav li.selected ul.submenu {
+            z-index: 999;
+            width: 1180px;
+            margin-top: 0;
+        }
+        #portal-globalnav li:hover ul, 
+        #portal-globalnav li li:hover ul, 
+        #portal-globalnav li li li:hover ul,
+        #portal-globalnav li li li li:hover ul, 
+        #portal-globalnav li.sfhover ul, 
+        #portal-globalnav li li.sfhover ul, 
+        #portal-globalnav li li li.sfhover ul,
+        #portal-globalnav li li li li.sfhover ul {
+            left: -999em;
+        }
+        #portal-globalnav .hoverParent > ul,
+        #portal-globalnav .hoverParent:hover > ul {
+            left: 0;
+        }
+        #portal-globalnav li.firstTab:hover > ul,
+        #portal-globalnav li.sfhover.firstTab > ul {
+            left: -18px;
+        }
+        #portal-globalnav ul li:hover,
+        #portal-globalnav ul li.sfhover {
+            position: static;
+        }
+        #portal-globalnav ul.submenu li {
             padding: 0;
             border: none;
             min-height: 18px;
             float: none;
             width: 192px;
         }
-        .plone-navbar-nav > li > ul.submenu > li {
+        #portal-globalnav ul.submenu li > a {
+            width: 192px;
+            box-sizing: content-box;
+        }
+        #portal-globalnav > li > ul.submenu > li {
             padding-left: 500px;
             margin-left: -500px;
         }
-        .plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) {
+        #portal-globalnav > li > ul.submenu > li:nth-of-type(2) {
             padding-top: 39px;
             padding-left: 500px;
             margin-left: -500px;
-            padding-bottom: 400px;
-            margin-bottom: -400px;
-            width: 192px;
+            padding-bottom: 300px;
+            margin-bottom: -300px;
+            box-sizing: content-box;
         }
-        .plone-navbar-nav > li > ul.submenu > li:nth-of-type(2) a {
-            width: 192px;
-        }
-        .plone-navbar-nav > li > ul.submenu > li:last-of-type {
+        #portal-globalnav > li > ul.submenu > li:last-of-type {
             padding: 0 0 200px 500px;
+            margin: 0 0 -200px -500px;
             width: 100%;
         }
-        .plone-navbar-nav ul.submenu a,
-        .plone-navbar-nav li.selected .submenu a {
+        #portal-globalnav ul.submenu a,
+        #portal-globalnav li.selected .submenu a {
             font-weight: normal;
+            font-family: 'Akkurat Bold', Arial, sans-serif;
             text-transform: none;
             border-top: none;
+            font-size: 15px;
             text-decoration: none;
             padding: 10px 7px 12px 25px;
             margin: 0 0 0 -25px;
         }
-        .plone-navbar-nav li.prevMenu {
+        #portal-globalnav li.prevMenu {
             display: none !important;
         }
-        .plone-navbar-nav ul.submenu a:hover,
-        .plone-navbar-nav ul.submenu .hoverItem > a,
-        .plone-navbar-nav ul.submenu .hoverItem > div > a,
-        .plone-navbar-nav li.selected ul.submenu a:hover {
+        #portal-globalnav ul.submenu a:hover,
+        #portal-globalnav ul.submenu .hoverItem > a,
+        #portal-globalnav ul.submenu .hoverItem > div > a,
+        #portal-globalnav li.selected ul.submenu a:hover {
             border: none;
             text-decoration: none;
-            background-color: #071d4b;
+            font-size: 15px;
             padding-left: 25px;
             margin-left: -25px;
         }
-        .plone-navbar-nav .submenu ul {
+        #portal-globalnav .submenu ul {
             top: 0;
-            display: none;
+            left: -999em;
             height: 100%;
             padding-top: 39px;
             margin-left: 192px;
             background-color: transparent;
-            left: auto;
         }
-        .plone-navbar-nav .submenu .hoverItem ul {
-            display: block;
-        }
-        .plone-navbar-nav .submenu ul li {
+        #portal-globalnav .submenu ul li {
             border-right: 1px solid rgba(0, 174, 239, 0.2);
         }
-        .plone-navbar-nav .navTreeLevel1:nth-of-type(1) {
+        #portal-globalnav .navTreeLevel1:nth-of-type(1) {
             padding-left: 45px;
         }
-        .plone-navbar-nav .navTreeLevel1:nth-of-type(2) {
+        #portal-globalnav .navTreeLevel1:nth-of-type(2) {
             margin-left: 557px;
         }
-        .plone-navbar-nav .navTreeLevel1:nth-of-type(3) {
+        #portal-globalnav .navTreeLevel1:nth-of-type(3) {
             margin-left: 878px;
             border-right: none;
         }
-        .plone-navbar-nav .navTreeLevel1:last-of-type li {
+        #portal-globalnav .navTreeLevel1:last-of-type li {
             border-right: none;
         }
-        .plone-navbar-nav ul.submenu ul a,
-        .plone-navbar-nav li.selected .submenu ul a,
-        .plone-navbar-nav ul.submenu ul a:hover,
-        .plone-navbar-nav ul.submenu .hoverItem ul > a,
-        .plone-navbar-nav ul.submenu .hoverItem ul > div > a,
-        .plone-navbar-nav li.selected ul.submenu ul a:hover {
+        #portal-globalnav ul.submenu ul a,
+        #portal-globalnav li.selected .submenu ul a,
+        #portal-globalnav ul.submenu ul a:hover,
+        #portal-globalnav ul.submenu .hoverItem ul > a,
+        #portal-globalnav ul.submenu .hoverItem ul > div > a,
+        #portal-globalnav li.selected ul.submenu ul a:hover {
             margin-left: 0;
+            background-color: transparent;
+            font-family: 'Akkurat', Arial, sans-serif;
             border-bottom: none !important;
         }
-        .plone-navbar-nav ul.submenu.navTreeLevel1 li {
+        #portal-globalnav ul.submenu.navTreeLevel1 li {
             padding: 11px 15px 11px 60px;
             width: 245px;
         }
-        .plone-navbar-nav ul.submenu.navTreeLevel1 li:hover a {
+        #portal-globalnav ul.submenu.navTreeLevel1 li:hover a {
             border-bottom: none !important;
         }
-        .plone-navbar-nav ul.submenu.navTreeLevel1 li a,
-        .plone-navbar-nav ul.submenu.navTreeLevel1 li a:hover {
+        #portal-globalnav ul.submenu.navTreeLevel1 li a,
+        #portal-globalnav ul.submenu.navTreeLevel1 li a:hover {
             width: auto;
             padding: 0;
             margin: 0;
         }
-        .plone-navbar-nav ul.submenu.navTreeLevel1 a.hasDropDown::after {
+        #portal-globalnav ul.submenu.navTreeLevel1 a.hasDropDown::after {
             content: '';
         }
-        .plone-navbar-nav ul.submenu.navTreeLevel2 {
+        #portal-globalnav ul.submenu.navTreeLevel2 {
             display: none !important;
         }
         /* display second level as a grid, determined by JS */
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(2),
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(3),
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(4),
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(5) {
+        #portal-globalnav > li.displayGrid > ul.submenu > li:nth-of-type(2),
+        #portal-globalnav > li.displayGrid > ul.submenu > li:nth-of-type(3),
+        #portal-globalnav > li.displayGrid > ul.submenu > li:nth-of-type(4) {
             margin: 39px 60px 0 0;
             padding: 0 0 0 0;
             width: 245px;
@@ -370,23 +431,18 @@
             background-color: transparent;
             float: left;
         }
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-of-type(5) {
-            margin-right: 0;
-        }
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:nth-last-of-type(2) {
+        #portal-globalnav > li.displayGrid > ul.submenu > li:nth-last-of-type(2) {
             border-right: none;
         }
-        /* subnavBase */
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li:last-of-type {
+        #portal-globalnav > li.displayGrid > ul.submenu > li:last-of-type {
             float: none;
-            box-sizing: content-box;
             width: 100%;
-            padding: 35px;
+            padding: 35px 500px;
+            margin: 0 -500px;
             border-right: none;
-            text-align: center;
         }
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li a,
-        .plone-navbar-nav > li.displayGrid > ul.submenu > li a:hover {
+        #portal-globalnav > li.displayGrid > ul.submenu > li a,
+        #portal-globalnav > li.displayGrid > ul.submenu > li a:hover {
             background-color: transparent;
             margin: 0;
             padding-left: 0;
@@ -403,17 +459,14 @@
             background: rgba(0, 0, 0, 0.85);
             z-index: 997;
         }
-        .stickyNav .plone-navbar-nav {
+        .stickyNav #portal-globalnav {
             top: 0;
             margin-top: 18px;
         }
-        .stickyNav .plone-navbar-nav > li > a {
-            /*color: #ffffff;*/
+        .stickyNav #portal-globalnav > li > a {
+            font-size: 16px;
         }
-        .stickyNav .plone-navbar-nav > li >a:hover {
-            /*color: #00aeef;*/
-        }
-        .stickyNav .plone-navbar-nav > li > .hoverParentLink::after {
+        .stickyNav #portal-globalnav > li > .hoverParentLink::after {
             content: ' ';
             display: block;
             width: 20px;
@@ -430,6 +483,7 @@
             margin-top: 0;
             top: 34px;
             z-index: 2;
+            font-size: 22px;
             height: 26px;
         }
         .stickyNav #portal-logo img {
@@ -469,7 +523,7 @@
             position: fixed;
             top: 37px;
             margin-top: 0;
-            /*color: #fff;*/
+            font-size: 22px;
             margin-left: 107px;
             z-index: 1px;
         }
@@ -480,16 +534,17 @@
         }
 
     }
-    .plone-navbar-nav > li > ul.submenu > li.subnavBase {
+    #portal-globalnav > li > ul.submenu > li.subnavBase {
         width: 100%;
-        background-color: #000000;
         position: absolute;
         padding: 35px 500px;
         margin: 0 -500px;
         z-index: 1001;
         height: 30px;
-        color: #ffffff;
+        font-size: 13px;
         bottom: 0;
+        text-align: center;
+        box-sizing: content-box;
     }
     .subnavBase.topLevel {
         display: none;
