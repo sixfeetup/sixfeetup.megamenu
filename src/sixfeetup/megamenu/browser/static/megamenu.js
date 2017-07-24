@@ -82,11 +82,7 @@
     }
     // display the second level nav in a grid if there is no tertiary nav
     var toplinksnum = $("#portal-globalnav > li").length;
-    if ($("body").hasClass("site-careers")) {
-        var split_at = 3;
-    } else {
-        var split_at = 5;
-    }
+    var split_at = 3;
     for(i = 0; i < toplinksnum; i++) {
         numlevels = $("#portal-globalnav > li").eq(i).find(".navTreeLevel1").length;
         numchildren = $("#portal-globalnav > li").eq(i).find(".submenu > li").length;
