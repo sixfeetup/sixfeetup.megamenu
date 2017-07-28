@@ -48,9 +48,9 @@
     </tal:level>
 </li>
 <tal:column define="num repeat/node/number;
-                    eighth python: num % 3 == 0;
+                    third python: num % 3 == 0;
                     level1 python:level > 1"
-            condition="python: eighth and level1">
+            condition="python: third and level1 and len(children) > num">
     <span tal:replace="structure string:</ul><ul class='submenu navTree navTreeLevel1'>" />
 </tal:column>
 </tal:navitem>
