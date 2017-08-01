@@ -1,6 +1,11 @@
 /* The following line defines global variables defined elsewhere. */
 /*globals $, jQuery*/
 
+mm_mobileMaxWidth = 1170 // site width in pixels when mobile switches to desktop
+mm_displayTimeout = 300 // time in milliseconds before menu displays on hover
+mm_hideTimeout = 500 // time in milliseconds before menu disappears on mouse out
+mm_split_at = 3; // links per column when displayed as a grid
+
 (function($) { $(function() {
     $('#portal-globalnav .noClick').click(function (e) {
         e.preventDefault();
@@ -25,7 +30,7 @@
             $(nav).addClass("hoverParent");
             $(".hoverParent > a").addClass("hoverParentLink");
             $("#LSResult").hide();
-        }, 300);
+        }, mm_displayTimeout);
     }
     function hideNav() {
         if (navActive == false) {
@@ -33,11 +38,11 @@
                 $(".hoverParent > a").removeClass("hoverParentLink");
                 $("#portal-globalnav li").removeClass("hoverParent");
                 $("#visual-portal-wrapper").removeClass("navactive");
-            }, 500);
+            }, mm_hideTimeout);
         }
     }
     
-    if ($(window).width() > 1170) {
+    if ($(window).width() > mm_mobileMaxWidth) {
         // main navigation classes for styling
         $("#portal-globalnav ul.submenu li").hover(
            function () { $(this).addClass("hoverItem"); }, 
@@ -82,7 +87,6 @@
     }
     // display the second level nav in a grid if there is no tertiary nav
     var toplinksnum = $("#portal-globalnav > li").length;
-    var split_at = 3;
     for(i = 0; i < toplinksnum; i++) {
         numlevels = $("#portal-globalnav > li").eq(i).find(".navTreeLevel1").length;
         numchildren = $("#portal-globalnav > li").eq(i).find(".submenu > li").length;
@@ -94,7 +98,7 @@
             var new_lists = links[0].outerHTML + "<li>";
             for(j = 1; j < links.length-1; j++) {
                 new_lists = new_lists + links[j].innerHTML;
-                if ((j % split_at == 0) && (j < links.length - 2)) {
+                if ((j % mm_split_at == 0) && (j < links.length - 2)) {
                     new_lists = new_lists + "</li><li>";
                 }
             }
@@ -116,11 +120,12 @@
         $(this).closest(".displayMenu").removeClass("displayMenu");
         return false;
     });
-    if ($(window).width() <= 1180) {
-        $("a.hasDropDown").live("click", function() {
+    if ($(window).width() <= mm_mobileMaxWidth) {
+        $("a.hasDropDown").on("click", function() {
             $(this).parent("li").toggleClass("displayMenu");
             return false;
         });
+        $("body").addClass("mm_mobile");
     }
     // find tallest submenu, make sure the whole thing is scrollable
     // this requires the globalnav to be display: block to get the heights

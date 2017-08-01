@@ -5,6 +5,11 @@
     <h5 class="hiddenStructure" i18n:translate="heading_sections">Sections</h5>
 
     <nav id="globalnav-wrapper">
+        <div id="nav-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
         <ul id="portal-globalnav"
             tal:define="selected_tab python:view.selected_portal_tab"
             ><tal:tabs tal:repeat="tab portal_tabs"

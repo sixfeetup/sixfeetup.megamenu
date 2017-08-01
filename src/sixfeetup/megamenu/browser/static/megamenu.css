@@ -3,19 +3,65 @@
 #portal-globalnav li .submenu,
 #subnav-wrapper,
 #portal-globalnav > li > .hoverParentLink::after,
-#portal-globalnav > li > ul.submenu > li.hoverItem a {
+#portal-globalnav > li > ul.submenu > li.hoverItem a,
+.mm_mobile.navactive #column-wrapper::before,
+.mm_mobile #portal-globalnav,
+.mm_mobile #portal-globalnav .displayMenu,
+.mm_mobile #portal-globalnav .displayMenu:hover,
+.mm_mobile #portal-globalnav > li > .submenu,
+.mm_mobile #portal-globalnav .mobileWrapper,
+.mm_mobile #portal-globalnav li.prevMenu .back,
+.mm_mobile #portal-globalnav > li > ul.submenu > li:nth-of-type(2),
+.mm_mobile #portal-globalnav li {
     background-color: #123456;
 }
 #portal-globalnav > li > ul.submenu > li:nth-of-type(2) {
     background-color: #345678;
 }
 #portal-globalnav li .submenu a,
-.subnavBase {
+.subnavBase,
+.mm_mobile #portal-globalnav li.prevMenu .back,
+.mm_mobile #portal-globalnav li a,
+.mm_mobile #portal-globalnav a.hasDropDown::after,
+.mm_mobile #portal-globalnav .displayMenu > a.hasDropDown::after {
     color: white;
 }
 .subnavBase {
     background-color: #000000 !important;
 }
+#nav-toggle .bar {
+    background-color: #999999;
+}
+.mm_mobile #portal-globalnav li.selected > a,
+.mm_mobile #portal-globalnav li.selected > a:hover,
+.mm_mobile #portal-globalnav li.selected ul.submenu a,
+.mm_mobile #portal-globalnav li.selected ul.submenu a:hover,
+.mm_mobile #portal-globalnav li.plain ul.submenu a,
+.mm_mobile #portal-globalnav li.plain ul.submenu a:hover {
+    border: none;
+    color: #ffffff;
+    background-color: transparent;
+}
+.mm_mobile #portal-globalnav li,
+.mm_mobile #portal-globalnav li.displayGrid ul.submenu a,
+.mm_mobile #portal-globalnav li.displayGrid.selected ul.submenu a,
+.mm_mobile #portal-globalnav li.displayGrid ul.submenu #prevMenu a,
+.mm_mobile #portal-globalnav li.displayGrid ul.submenu a:hover,
+.mm_mobile #portal-globalnav li.displayGrid.selected ul.submenu a:hover,
+.mm_mobile #portal-globalnav li.displayGrid ul.submenu #prevMenu a:hover,
+.mm_mobile #portal-globalnav li.plain ul.submenu li.prevMenu .back,
+.mm_mobile #portal-globalnav li.selected ul.submenu li.prevMenu .back {
+    border-bottom: 1px solid #345678;
+}
+.mm_mobile #portal-globalnav .navTreeLevel1:nth-of-type(2),
+.mm_mobile #portal-globalnav .navTreeLevel1:nth-of-type(3) {
+    border-top: 1px solid #345678;
+}
+.mm_mobile .subnavBase.topLevel {
+    background-color: #000000;
+}
+/* END COLORS */
+
 
 /* keep the edit bar on top */
 .plone-toolbar-left #edit-zone {
@@ -538,3 +584,167 @@ ul.submenu {
     .subnavBase.topLevel {
         display: none;
     }
+
+
+/* responsiveness 
+   mm_mobile class is applied via JS */
+.mm_mobile #nav-toggle {
+    display: block;
+}
+.mm_mobile #portal-globalnav-wrapper {
+    height: auto;
+}
+.mm_mobile.navactive #column-wrapper {
+    display: none;
+}
+.mm_mobile #portal-globalnav {
+    visibility: hidden;
+    top: 0;
+    clear: both;
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+    overflow: hidden;
+    width: 100%;
+}
+.mm_mobile #portal-globalnav.mobileReady {
+    display: none;
+    visibility: visible;
+}
+.mm_mobile #portal-globalnav.displayMenu {
+    display: block;
+}
+.mm_mobile #portal-globalnav,
+.mm_mobile #portal-globalnav li,
+.mm_mobile #portal-globalnav li a,
+.mm_mobile #portal-globalnav li.selected a {
+    float: none;
+    font-size: 15px;
+    -webkit-text-size-adjust: none;
+    text-transform: none;
+}
+.mm_mobile #portal-globalnav li a {
+    font-weight: normal;
+    padding: 8px 9% !important;
+    position: relative;
+    width: 100%;
+}
+.mm_mobile #portal-globalnav li a:hover {
+    font-size: 15px;
+    text-decoration: none
+}
+.mm_mobile #portal-globalnav li a:focus {
+    outline: none;
+}
+.mm_mobile #portal-globalnav li {
+    display: block;
+    position: static;
+    float: none;
+}
+.mm_mobile #portal-globalnav a.hasDropDown::after {
+    content: '>';
+    display: inline-block;
+    position: absolute;
+    right: 33px;
+}
+.mm_mobile #portal-globalnav .submenu {
+    border: none;
+    width: auto;
+    padding-left: 0;
+}
+.mm_mobile #portal-globalnav > li > .submenu {
+    left: 100% !important;
+    top: 0 !important;
+    position: absolute !important;
+    display: block !important;
+    transition: all 0.5s ease-in-out;
+    padding-bottom: 500px;
+    margin-bottom: -500px;
+}
+.mm_mobile #portal-globalnav .mobileWrapper {
+    left: 100% !important;
+    top: 0 !important;
+    position: absolute !important;
+    display: block !important;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    padding-bottom: 500px;
+    margin-bottom: -500px;
+    z-index: 5;
+}
+.mm_mobile #portal-globalnav .mobileWrapper .submenu {
+    position: static !important;
+}
+.mm_mobile #portal-globalnav li:hover ul, 
+.mm_mobile #portal-globalnav li li:hover ul, 
+.mm_mobile #portal-globalnav li li li:hover ul,
+.mm_mobile #portal-globalnav li li li li:hover ul, 
+.mm_mobile #portal-globalnav li.sfhover ul, 
+.mm_mobile #portal-globalnav li li.sfhover ul, 
+.mm_mobile #portal-globalnav li li li.sfhover ul,
+.mm_mobile #portal-globalnav li li li li.sfhover ul {
+    left: 100% !important;
+}
+.mm_mobile #portal-globalnav .displayMenu > .submenu,
+.mm_mobile #portal-globalnav .displayMenu > .mobileWrapper {
+    left: 0 !important;
+    z-index: 1;
+    padding-left: 0;
+    width: 100%;
+}
+.mm_mobile #portal-globalnav .submenu li {
+    position: static !important;
+}
+.mm_mobile #portal-globalnav li.displayGrid li {
+    border-bottom: none;
+}
+.mm_mobile #portal-globalnav li.selected ul.submenu a,
+.mm_mobile #portal-globalnav li.selected ul.submenu a:hover,
+.mm_mobile #portal-globalnav li.plain ul.submenu a,
+.mm_mobile #portal-globalnav li.plain ul.submenu a:hover {
+    padding-left: 40px;
+    font-weight: normal;
+}
+.mm_mobile #portal-globalnav li.prevMenu .back {
+    padding: 8px 4% !important;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.mm_mobile .prevMenu span {
+    color: #85bd40;
+    padding-right: 5px;
+}
+.mm_mobile #portal-globalnav .navTreeLevel1:nth-of-type(2),
+.mm_mobile #portal-globalnav .navTreeLevel1:nth-of-type(3) {
+    margin-left: 0;
+}
+.mm_mobile #portal-globalnav li ul ul {
+    margin-left: 0;
+}
+.mm_mobile #portal-globalnav ul.submenu.navTreeLevel1 li {
+    width: 100%;
+    padding: 0;
+}
+.mm_mobile #portal-globalnav .submenu li.subnavBase {
+    display: none !important;
+}
+.mm_mobile .subnavBase.topLevel {
+    position: fixed;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    bottom: 0;
+    padding: 35px 1% 0;
+    width: 98%;
+    margin: 0;
+    z-index: 999;
+}
+.mm_mobile .subnavBase.topLevel .btn1 {
+    float: left;
+    position: relative;
+    top: -16px;
+}
+.mm_mobile #subnav-wrapper {
+    margin-top: 92px;
+}
+.mm_mobile.navactive #subnav-wrapper {
+    height: 50px !important;
+}
