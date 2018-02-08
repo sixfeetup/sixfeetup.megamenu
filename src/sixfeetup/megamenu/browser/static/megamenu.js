@@ -41,50 +41,77 @@ mm_split_at = 3; // links per column when displayed as a grid
             }, mm_hideTimeout);
         }
     }
-    
-    if ($(window).width() > mm_mobileMaxWidth) {
-        // main navigation classes for styling
-        $("#portal-globalnav ul.submenu li").hover(
-           function () { $(this).addClass("hoverItem"); }, 
-           function () { $(this).removeClass("hoverItem"); }
-        );
-        $("#portal-globalnav").hover(
-            function () {
-                navActive = true;
-            }, 
-            function () {
-                navActive = false;
-                hideNav();
-            }
-        );
-        $("#portal-globalnav > li").hover(
-            function () {
-                if ($(this).find("ul").length > 0) {
+
+    function setMenu() {
+        if ($(window).width() > mm_mobileMaxWidth) {
+            // main navigation classes for styling
+            $("#portal-globalnav ul.submenu li").unbind('mouseenter mouseleave');
+            $("#portal-globalnav ul.submenu li").hover(
+                function () {
+                    $(this).addClass("hoverItem");
+                },
+                function () {
+                    $(this).removeClass("hoverItem");
+                }
+            );
+            $("#portal-globalnav").unbind('mouseenter mouseleave');
+            $("#portal-globalnav").hover(
+                function () {
                     navActive = true;
-                    try {
-                        clearTimeout(hideNavTimeout);
-                    } catch(err) {
-                        // continue
-                    }
-                    showNav(this);
-                } else {
+                },
+                function () {
                     navActive = false;
                     hideNav();
                 }
-            }, 
-            function () {
-                clearTimeout(showNavTimeout);
-            }
-        );
-        $("#portal-globalnav > li > a").hover(
-            function () {
-                $(this).parent("li").find("ul.submenu > li:eq(1):has(div)").addClass("hoverItem");
-            }, 
-            function () {
-                // nothing
-            }
-        );
+            );
+            $("#portal-globalnav > li").unbind('mouseenter mouseleave');
+            $("#portal-globalnav > li").hover(
+                function () {
+                    if ($(this).find("ul").length > 0) {
+                        navActive = true;
+                        try {
+                            clearTimeout(hideNavTimeout);
+                        } catch (err) {
+                            // continue
+                        }
+                        showNav(this);
+                    } else {
+                        navActive = false;
+                        hideNav();
+                    }
+                },
+                function () {
+                    clearTimeout(showNavTimeout);
+                }
+            );
+            $("#portal-globalnav > li > a").unbind('mouseenter mouseleave');
+            $("#portal-globalnav > li > a").hover(
+                function () {
+                    $(this).parent("li").find("ul.submenu > li:eq(1):has(div)").addClass("hoverItem");
+                },
+                function () {
+                    // nothing
+                }
+            );
+            $("body").removeClass("mm_mobile");
+        } else {
+            $("a.hasDropDown").unbind('click');
+            $("a.hasDropDown").on("click", function() {
+                $(this).parent("li").toggleClass("displayMenu");
+                return false;
+            });
+            $("body").addClass("mm_mobile");
+        }
     }
+    setMenu();
+    var menuTimer;
+    $(window).on('resize', function(e) {
+      clearTimeout(menuTimer);
+      menuTimer = setTimeout(function() {
+        setMenu();
+      }, 300);
+    });
+
     // display the second level nav in a grid if there is no tertiary nav
     var toplinksnum = $("#portal-globalnav > li").length;
     for(i = 0; i < toplinksnum; i++) {
@@ -120,13 +147,6 @@ mm_split_at = 3; // links per column when displayed as a grid
         $(this).closest(".displayMenu").removeClass("displayMenu");
         return false;
     });
-    if ($(window).width() <= mm_mobileMaxWidth) {
-        $("a.hasDropDown").on("click", function() {
-            $(this).parent("li").toggleClass("displayMenu");
-            return false;
-        });
-        $("body").addClass("mm_mobile");
-    }
     // find tallest submenu, make sure the whole thing is scrollable
     // this requires the globalnav to be display: block to get the heights
     var tallestSubnav = 0;
