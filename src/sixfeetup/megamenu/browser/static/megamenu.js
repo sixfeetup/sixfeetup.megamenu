@@ -41,6 +41,11 @@ mm_split_at = 3; // links per column when displayed as a grid
             }, mm_hideTimeout);
         }
     }
+    function hideNavNow() {
+        $(".hoverParent > a").removeClass("hoverParentLink");
+        $("#portal-globalnav li").removeClass("hoverParent");
+        $("#visual-portal-wrapper").removeClass("navactive");
+    }
 
     function setMenu() {
         if ($(window).width() > mm_mobileMaxWidth) {
@@ -84,6 +89,9 @@ mm_split_at = 3; // links per column when displayed as a grid
                     clearTimeout(showNavTimeout);
                 }
             );
+            $("#portal-globalnav > li").click(function(){
+                hideNavNow();
+            });
             $("#portal-globalnav > li > a").unbind('mouseenter mouseleave');
             $("#portal-globalnav > li > a").hover(
                 function () {
