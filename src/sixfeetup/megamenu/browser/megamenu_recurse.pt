@@ -34,7 +34,7 @@
              tal:condition="python: len(children) > 0 and show_children">
             <ul tal:attributes="class python:'submenu navTree navTreeLevel'+str(level)">
                 <li class="prevMenu">
-                    <a href="#" class="back">
+                    <a href="#" class="back" rel="nofollow">
                         <span>&lt;</span>
                         Back
                     </a>

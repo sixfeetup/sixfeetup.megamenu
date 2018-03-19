@@ -28,7 +28,7 @@
                 ><tal:block tal:condition="subitems">
                     <ul class="submenu">
                         <li class="prevMenu">
-                            <a href="#" class="back">
+                            <a href="#" class="back" rel="nofollow">
                                 <span>&lt;</span>
                                 Back
                             </a>
