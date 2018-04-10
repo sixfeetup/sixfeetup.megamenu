@@ -14,7 +14,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='sixfeetup.megamenu',
-    version='0.4',
+    version='0.5',
     description="Display the global navigation with dropdowns as a mega menu",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
