@@ -3,11 +3,12 @@
 	
 	<records prefix="plone.bundles/megamenu"
          interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="enabled">True</value>
-    <value key="jscompilation">++plone++megamenu/megamenu.js</value>
-    <value key="csscompilation">++plone++megamenu/megamenu.css</value>
-    <value key="compile">False</value>
-    <value key="depends">plone</value>
-</records>
+        <value key="enabled">True</value>
+        <value key="jscompilation">++plone++megamenu/megamenu.min.js</value>
+        <value key="csscompilation">++plone++megamenu/megamenu.min.css</value>
+        <value key="last_compilation">2018-04-10 07:00:00</value>
+        <value key="compile">False</value>
+        <value key="depends">plone</value>
+    </records>
 
 </registry>

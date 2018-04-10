@@ -2,99 +2,39 @@ module.exports = function (grunt) {
     'use strict';
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        // we could just concatenate everything, really
-        // but we like to have it the complex way.
-        // also, in this way we do not have to worry
-        // about putting files in the correct order
-        // (the dependency tree is walked by r.js)
-        less: {
-            dist: {
-                options: {
-                    paths: [],
-                    strictMath: false,
-                    sourceMap: true,
-                    outputSourceFiles: true,
-                    sourceMapURL: '++theme++megamenu/less/theme-compiled.css.map',
-                    sourceMapFilename: 'less/theme-compiled.css.map',
-                    modifyVars: {
-                        "isPlone": "false"
-                    }
-                },
+        cssmin: {
+            target: {
                 files: {
-                    'less/theme-compiled.css': 'less/theme.local.less',
+                    'src/sixfeetup/megamenu/browser/static/megamenu.min.css': 'src/sixfeetup/megamenu/browser/static/megamenu.css'
                 }
             }
         },
-        postcss: {
+        uglify: {
             options: {
-                map: true,
-                processors: [
-                    require('autoprefixer')({
-                        browsers: ['last 2 versions']
-                    })
-                ]
+                mangle: false
             },
-            dist: {
-                src: 'less/*.css'
+            my_target: {
+                files: {
+                    'src/sixfeetup/megamenu/browser/static/megamenu.min.js': 'src/sixfeetup/megamenu/browser/static/megamenu.js'
+                }
             }
         },
         watch: {
-            scripts: {
-                files: [
-                    'less/*.less',
-                    'barceloneta/less/*.less'
-                ],
-                tasks: ['less', 'postcss']
-            }
-        },
-        browserSync: {
-            html: {
-                bsFiles: {
-                    src : [
-                      'less/*.less',
-                      'barceloneta/less/*.less'
-                    ]
-                },
-                options: {
-                    watchTask: true,
-                    debugInfo: true,
-                    online: true,
-                    server: {
-                        baseDir: "."
-                    },
-                }
+            cssmin: {
+                files: 'src/sixfeetup/megamenu/browser/static/megamenu.css',
+                tasks: ['css']
             },
-            plone: {
-                bsFiles: {
-                    src : [
-                      'less/*.less',
-                      'barceloneta/less/*.less'
-                    ]
-                },
-                options: {
-                    watchTask: true,
-                    debugInfo: true,
-                    proxy: "localhost:8080",
-                    reloadDelay: 3000,
-                    // reloadDebounce: 2000,
-                    online: true
-                }
+            uglify: {
+                files: 'src/sixfeetup/megamenu/browser/static/megamenu.js',
+                tasks: ['js']
             }
         }
     });
-
-
-    // grunt.loadTasks('tasks');
-    grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-postcss');
-
-    // CWD to theme folder
-    grunt.file.setBase('./src/sixfeetup/megamenu/theme');
-
-    grunt.registerTask('compile', ['less', 'postcss']);
-    grunt.registerTask('default', ['compile']);
-    grunt.registerTask('bsync', ["browserSync:html", "watch"]);
-    grunt.registerTask('plone-bsync', ["browserSync:plone", "watch"]);
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('css', ['cssmin']);
+    grunt.registerTask('js', ['uglify']);
+    grunt.registerTask('build', ['css', 'js']);
 };
